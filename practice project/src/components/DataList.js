@@ -2,7 +2,6 @@ import DataItem from "./DataItem";
 import styles from "./InputForm.module.css";
 
 const DataList = (props) => {
-  console.log("dddsd");
   return (
     <ul className={styles.card}>
       {props.users.map((data) => {

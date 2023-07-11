@@ -5,6 +5,7 @@ const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
+  const [isValid,setIsvalid]=useState(true);
 
   // multiple sates in one stat
   //   const [usersInput, setUserInput] = useState({
@@ -36,6 +37,11 @@ const ExpenseForm = (props) => {
 
   const submithandler = (e) => {
     e.preventDefault();
+    if(enteredTitle===''||enteredAmount===""||enteredDate===""){
+      setIsvalid(false)
+      return;
+    }
+    setIsvalid(true)
     const expenseData = {
       title: enteredTitle,
       amount: enteredAmount,
@@ -53,10 +59,9 @@ const ExpenseForm = (props) => {
     <form onSubmit={submithandler}>
       {!addExpense && (
         <button onClick={() => setAddExpense(true)}>Add New Expense</button>
-      )}
+        )}
       {addExpense && (
         <div>
-          {" "}
           <div className="new-expense__controls">
             <div className="new-expense__control">
               <label>Title</label>
@@ -64,7 +69,7 @@ const ExpenseForm = (props) => {
                 type="text"
                 value={enteredTitle}
                 onChange={titleChangeHandler}
-              />
+                />
             </div>
 
             <div className="new-expense__control">
@@ -75,7 +80,7 @@ const ExpenseForm = (props) => {
                 step="0.1"
                 value={enteredAmount}
                 onChange={amountChangeHandler}
-              />
+                />
             </div>
 
             <div className="new-expense__control">
@@ -86,9 +91,10 @@ const ExpenseForm = (props) => {
                 value={enteredDate}
                 max={new Date().toDateString()}
                 onChange={dateChangeHandler}
-              />
+                />
             </div>
           </div>
+                {!isValid&&<p>Enter data to form</p>}
           <div className="new-expense__actions">
             <button type="submit" onClick={() => setAddExpense(false)}>
               Cancel

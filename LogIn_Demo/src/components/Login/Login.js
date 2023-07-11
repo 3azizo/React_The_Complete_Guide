@@ -21,6 +21,7 @@ const emailReducer = (state, action) => {
   }
   return { value: "", isValid: false };
 };
+
 const passwordReducer = (state, action) => {
   if (action.type === "INPUT_PASS") {
     return { value: action.val, isValid: action.val.trim().length > 6 };
