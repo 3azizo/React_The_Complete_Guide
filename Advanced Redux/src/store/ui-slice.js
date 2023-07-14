@@ -1,10 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 const uiSlice = createSlice({
   name: "ui",
-  initialState: { cartIsVisible: false },
+  initialState: { cartIsVisible: false, notification: null },
   reducers: {
     toggle(state) {
       state.cartIsVisible = !state.cartIsVisible;
+    },
+    showNatification(state, actions) {
+      state.notification = {
+        status: actions.payload.status,
+        title: actions.payload.title,
+        message: actions.payload.message,
+      };
     },
   },
 });
